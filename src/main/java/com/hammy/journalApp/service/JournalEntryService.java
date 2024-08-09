@@ -1,6 +1,7 @@
 package com.hammy.journalApp.service;
 
 import com.hammy.journalApp.entity.JournalEntry;
+import com.hammy.journalApp.entity.User;
 import com.hammy.journalApp.repository.JournalEntryRepository;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -19,9 +20,24 @@ public class JournalEntryService {
     @Autowired
     private JournalEntryRepository journalEntryRepository;
 
+    @Autowired
+    private UserService userService;
+
+    public void saveEntry(JournalEntry journalEntry, String userName) {
+        try {
+            User user = userService.findByUserName(userName);
+            journalEntry.setDate(LocalDateTime.now());
+            JournalEntry saved = journalEntryRepository.save(journalEntry);
+            user.getJournalEntries().add(saved);
+            userService.saveEntry(user);
+        } catch (Exception e) {
+            log.error("Exception ", e);
+        }
+
+    }
+
     public void saveEntry(JournalEntry journalEntry) {
         try {
-            journalEntry.setDate(LocalDateTime.now());
             journalEntryRepository.save(journalEntry);
         } catch (Exception e) {
             log.error("Exception ", e);
@@ -37,7 +53,10 @@ public class JournalEntryService {
         return journalEntryRepository.findById(id);
     }
 
-    public void deleteById(ObjectId id) {
+    public void deleteById(ObjectId id, String userName) {
+        User user = userService.findByUserName(userName);
+        user.getJournalEntries().removeIf(x -> x.getId().equals(id));
+        userService.saveEntry(user);
         journalEntryRepository.deleteById(id);
     }
 
