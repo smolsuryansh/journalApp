@@ -31,4 +31,6 @@ public class User {
     @DBRef // creating a link between users and journal_entries using this annotation
     private List<JournalEntry> journalEntries = new ArrayList<>();
 
+    private List<String> roles;
+
 }

@@ -20,6 +20,7 @@ public class JournalApplication {
 	public PlatformTransactionManager beanBoi(MongoDatabaseFactory dbFactory) {
 		return new MongoTransactionManager(dbFactory);
 	}
+
 	// PlatformTransactionManager
 	// MongoDatabaseFactory
 	// MongoTransactionManager
