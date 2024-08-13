@@ -1,11 +1,8 @@
 package com.hammy.journalApp.controller;
 
-import com.hammy.journalApp.entity.JournalEntry;
 import com.hammy.journalApp.entity.User;
 import com.hammy.journalApp.repository.UserRepository;
-import com.hammy.journalApp.service.JournalEntryService;
 import com.hammy.journalApp.service.UserService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -40,7 +36,7 @@ public class UserController {
 
         userInDb.setUserName(user.getUserName());
         userInDb.setPassword(user.getPassword());
-        userService.saveEntry(userInDb);
+        userService.saveNewUser(userInDb);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
