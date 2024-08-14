@@ -5,6 +5,7 @@ import com.hammy.journalApp.repository.UserRepository;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,7 @@ public class UserServiceTests {
     private UserRepository userRepository;
 
     @ParameterizedTest
-    @ValueSource(strings = {
-            "ram",
-            "soryons",
-            "random"
-    })
+    @ArgumentsSource(UsersArgumentProvider.class)
     public void testFindByUsername(String name) {
         assertNotNull(userRepository.findByUserName(name));
     }
