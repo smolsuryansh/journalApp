@@ -8,9 +8,9 @@ import com.hammy.journalApp.entity.User;
 
 import java.util.stream.Stream;
 
+@Disabled
 public class UsersArgumentProvider implements ArgumentsProvider {
 
-    @Disabled
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
         return Stream.of(
