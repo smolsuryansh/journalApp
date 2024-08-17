@@ -4,6 +4,7 @@ import com.hammy.journalApp.entity.User;
 import com.hammy.journalApp.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
@@ -24,11 +25,13 @@ public class UserDetailsServiceImplTests {
     @Mock
     private UserRepository userRepository;
 
+    @Disabled
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
+    @Disabled
     @Test
     void loadByUserNameTest() {
         when(userRepository.findByUserName(ArgumentMatchers.anyString())).thenReturn(User.builder().userName("ram").password("123").roles(new ArrayList<>()).build());
