@@ -22,10 +22,10 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAll();
-    }
+//    @GetMapping
+//    public List<User> getAllUsers() {
+//        return userService.getAll();
+//    }
 
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user) {
@@ -41,12 +41,19 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping()
-    public ResponseEntity<?> deleteUserById(@RequestBody User user) {
+    @DeleteMapping
+    public ResponseEntity<?> deleteUserById() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         userRepository.deleteByUserName(authentication.getName());
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> greeting() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return new ResponseEntity<>("Hi " + authentication.getName(), HttpStatus.OK);
     }
 
 }
