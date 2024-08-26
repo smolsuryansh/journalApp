@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
 
-public class UserRespositoryImpl {
+public class UserRepositoryImpl {
 
     @Autowired
     private MongoTemplate mongoTemplate;
