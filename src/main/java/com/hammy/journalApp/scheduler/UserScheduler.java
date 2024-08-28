@@ -45,6 +45,7 @@ public class UserScheduler {
                     sentimentCounts.put(sentiment, sentimentCounts.getOrDefault(sentiment, 0) + 1);
                 }
             }
+
             Sentiment mostFrequentSentiment = null;
             int maxCount = 0;
             for (Map.Entry<Sentiment, Integer> entry : sentimentCounts.entrySet()) {
